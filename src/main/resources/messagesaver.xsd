@@ -1,0 +1,74 @@
+ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.messagesaver.com/messages"
+           targetNamespace="http://www.messagesaver.com/messages"
+           elementFormDefault="qualified">
+
+     <xs:element name="Message">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="author" type="xs:string"/>
+                 <xs:element name="body">
+                     <xs:simpleType>
+                         <xs:restriction base="xs:string">
+                             <xs:minLength value="1"/>
+                             <xs:maxLength value="200"/>
+                         </xs:restriction>
+                     </xs:simpleType>
+                 </xs:element>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="GetAllMessagesRequest">
+         <xs:complexType/>
+     </xs:element>
+
+     <xs:element name="GetAllMessagesResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element ref="tns:Message" maxOccurs="unbounded"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="GetAllAuthorMessagesRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="authorName" type="xs:string"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="GetAllAuthorMessagesResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element ref="tns:Message" maxOccurs="unbounded"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="AddMessageRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element ref="tns:Message"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="AddMessageResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element ref="tns:Message"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="DeleteMessagesByAuthorRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="authorName" type="xs:string"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+ </xs:schema>
